@@ -1,11 +1,13 @@
 package project.docusign.app.email;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+@CrossOrigin
 @RestController
 public class EmailController {
 	@Autowired
@@ -15,6 +17,7 @@ public class EmailController {
 	public Email addEmail(@RequestBody Email email) {
 		return emailService.addEmail(email);
 	}
+	
 	
 	@RequestMapping("/email")
 	public String getEmailLast() {
