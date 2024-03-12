@@ -1,1 +1,5 @@
-project/docusign/App.class
+project/docusign/app/email/EmailRepository.class
+project/docusign/app/email/EmailController.class
+project/docusign/app/email/EmailService.class
+project/docusign/app/email/Email.class
+project/docusign/app/App.class

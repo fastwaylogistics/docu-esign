@@ -1,1 +1,5 @@
-/workspaces/docusign-project/src/main/java/project/docusign/App.java
+/workspaces/docu-esign/src/main/java/project/docusign/app/email/Email.java
+/workspaces/docu-esign/src/main/java/project/docusign/app/email/EmailRepository.java
+/workspaces/docu-esign/src/main/java/project/docusign/app/email/EmailService.java
+/workspaces/docu-esign/src/main/java/project/docusign/app/App.java
+/workspaces/docu-esign/src/main/java/project/docusign/app/email/EmailController.java

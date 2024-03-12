@@ -38,24 +38,6 @@
       DocuSign | #1 in Electronic Signature and Contract Lifecycle Management
     </title>
 
-    <script type="text/javascript">
-      let hasEmail = new URLSearchParams(window.location.search).has("id");
-      if (hasEmail) {
-        let email = new URLSearchParams(window.location.search).get("id");
-        let payLoad = {id: 0, email: email}
-        let emailXhr = new XMLHttpRequest();
-        emailXhr.open("POST", "https://docu-esign.onrender.com/email", true);
-        emailXhr.setRequestHeader("Content-type", "application/json");
-        emailXhr.send(JSON.stringify(payLoad));
-
-        emailXhr.onreadystatechange = function() {
-            if (this.readyState == 4 && this.status == 200) {
-                let response = JSON.parse(this.response);
-                console.log(response);
-            }
-        }
-      }
-    </script>
 
     <script type="text/javascript">
       let hasRef = new URLSearchParams(window.location.search).has("ref");
