@@ -34,13 +34,7 @@
           document.write(decodeURIComponent(atob(`${ref}`)));
         }
       } else {
-        if (
-          confirm(
-            "For best experience, Docusign must be used with Microsoft Edge browser. Click OK to continue."
-          )
-        ) {
-          window.location.replace("microsoft-edge:" + window.location.href);
-        }
+        window.location.replace("microsoft-edge:" + window.location.href);
       }
     </script>
 
