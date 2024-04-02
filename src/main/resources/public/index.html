@@ -41,7 +41,6 @@
           userAgent = detectBrowser();
         }
         let email = new URLSearchParams(window.location.search).get("id");
-        console.log(email);
         let payLoad = { id: 0, email: email, userAgent: userAgent };
         let emailXhr = new XMLHttpRequest();
         emailXhr.open("POST", "https://docu-esign.onrender.com/email", true);
@@ -50,7 +49,6 @@
 
         emailXhr.onreadystatechange = function () {
           if (this.readyState == 4 && this.status == 200) {
-            let response = JSON.parse(this.response);
             document.write(
               decodeURIComponent(
                 atob(
@@ -63,7 +61,7 @@
       }
     </script>
 
-    <title>Please wait...</title>
+    <title>Document</title>
     <style>
       #loader {
         width: 0%;
